@@ -1,0 +1,23 @@
+# Node / Cloudflare
+node_modules/
+.wrangler/
+dist/
+
+# Gradle / Kotlin
+.gradle/
+**/build/
+local.properties
+*.hprof
+
+# Kotlin/Native & Xcode
+*.xcframework/
+.kotlin/
+xcuserdata/
+*.xcuserstate
+DerivedData/
+
+# OS / editors
+.DS_Store
+.idea/
+*.iml
+.vscode/

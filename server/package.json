@@ -1,0 +1,18 @@
+{
+  "name": "loklok-server",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Loklok realtime chat server — Cloudflare Worker + Durable Object",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "token": "node scripts/make-token.mjs",
+    "smoke": "node scripts/smoke.mjs"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20240605.0",
+    "typescript": "^5.4.0",
+    "wrangler": "^4.0.0",
+    "ws": "^8.18.0"
+  }
+}
