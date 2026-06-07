@@ -1,12 +1,18 @@
+<div align="center">
+
 # Loklok
 
-A small, real-time chat **SDK** — like a miniature [Stream](https://getstream.io) — built to be
-dropped into mobile apps. One shared core written in **Kotlin Multiplatform**, shipped as native
-SDKs for **Android** and **iOS**, backed by a chat server I deployed on **Cloudflare Workers +
-Durable Objects**. Runs entirely on free tiers.
+**A miniature real-time chat SDK — one Kotlin Multiplatform core, shipped as native Android & iOS SDKs, backed by a Cloudflare Workers + Durable Objects server. Runs entirely on free tiers.**
 
-> The point isn't "a chat screen" — it's the **SDK design**: one core, a clean cross-platform API,
-> lossless reconnection, and a documented wire protocol that real apps integrate in ~10 lines.
+![Kotlin Multiplatform](https://img.shields.io/badge/Kotlin_Multiplatform-7F52FF?style=flat&logo=kotlin&logoColor=white)
+![Ktor](https://img.shields.io/badge/Ktor_WebSockets-087CFA?style=flat&logo=ktor&logoColor=white)
+![Cloudflare](https://img.shields.io/badge/Cloudflare_Workers_+_DO-F38020?style=flat&logo=cloudflare&logoColor=white)
+![Jetpack Compose](https://img.shields.io/badge/Jetpack_Compose-4285F4?style=flat&logo=jetpackcompose&logoColor=white)
+![SwiftUI](https://img.shields.io/badge/SwiftUI-0071E3?style=flat&logo=swift&logoColor=white)
+
+</div>
+
+> The point isn't "a chat screen" — it's the **SDK design**: one core, a clean cross-platform API, lossless reconnection, and a documented wire protocol that real apps integrate in ~10 lines.
 
 ---
 
@@ -14,8 +20,7 @@ Durable Objects**. Runs entirely on free tiers.
 
 - **Real-time messaging** over a single WebSocket per room
 - **Optimistic sends** with server `ack` reconciliation (no duplicates)
-- **Lossless reconnection** — every message carries a monotonic `seq`; on reconnect the client
-  replays only what it missed via `sync(lastSeq)`
+- **Lossless reconnection** — every message carries a monotonic `seq`; on reconnect the client replays only what it missed via `sync(lastSeq)`
 - **Offline send queue** — messages typed while disconnected flush automatically on reconnect
 - **Presence** (online/offline, with a snapshot for late joiners) and **typing indicators**
 - **JWT auth** — the server verifies an HS256 token before upgrading the socket
@@ -98,23 +103,18 @@ The emulator reaches a local `wrangler dev` at `http://10.0.2.2:8787` (already c
 cd sdk-kmp && ./build-xcframework.sh    # requires Xcode
 # then open samples/ios-demo in Xcode, add the LoklokKit local package, run
 ```
-See [samples/ios-demo/README.md](samples/ios-demo/README.md) for the Xcode setup steps.
-
----
 
 ## What's verified
 
-- ✅ **Backend** — `npm run smoke` passes 8/8 (message fan-out, ack, presence snapshot, typing,
-  lossless reconnect-sync) against `wrangler dev`.
-- ✅ **SDK core** — 8 unit tests pass (`./gradlew :core:testDebugUnitTest`): optimistic/ack dedupe,
-  seq ordering, history resync merge, backoff bounds, reconnect-then-resync, offline-queue flush.
+- ✅ **Backend** — `npm run smoke` passes 8/8 (message fan-out, ack, presence snapshot, typing, lossless reconnect-sync) against `wrangler dev`.
+- ✅ **SDK core** — 8 unit tests pass: optimistic/ack dedupe, seq ordering, history resync merge, backoff bounds, reconnect-then-resync, offline-queue flush.
 - ✅ **Android** — the SDK assembles to `core-release.aar` and the Compose demo builds to an APK.
 - 📦 **iOS** — XCFramework + SwiftUI demo are scaffolded; build with Xcode via `build-xcframework.sh`.
 
 ## Tech
 
-Kotlin Multiplatform · Ktor WebSockets · kotlinx.coroutines / serialization · Cloudflare Workers ·
-Durable Objects (WebSocket Hibernation + SQLite) · Jetpack Compose · SwiftUI.
+Kotlin Multiplatform · Ktor WebSockets · kotlinx.coroutines / serialization · Cloudflare Workers · Durable Objects (WebSocket Hibernation + SQLite) · Jetpack Compose · SwiftUI.
 
-See [docs/roadmap.md](docs/roadmap.md) for what's deliberately out of scope (and why the protocol
-already leaves room for it).
+---
+
+<div align="center"><sub>Built by <b>Ahmed Essam</b> · <a href="mailto:ahmedessamedeen@gmail.com">ahmedessamedeen@gmail.com</a> · <a href="https://github.com/ahmedessameldeen">@ahmedessameldeen</a></sub></div>
