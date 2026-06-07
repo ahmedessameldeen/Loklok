@@ -27,23 +27,17 @@
 
 ## Architecture
 
-```
-                 Cloudflare Worker  (routes /room/:id/ws, verifies JWT)
-                          │  upgrades the WebSocket → the room's Durable Object
-                          ▼
-              Durable Object (one per room)
-              ├─ WebSocket Hibernation API  (idle rooms cost nothing)
-              ├─ SQLite: messages with monotonic seq
-              └─ in-memory: presence + typing
-                          ▲   one WebSocket per room
-        ┌─────────────────┴─────────────────┐
-        │      KMP shared core (Kotlin)      │   ← all the logic lives here, once
-        │  ChatClient · Channel · MessageStore │
-        │  Ktor WS transport · reconnect/backoff │
-        ├──────────────────┬─────────────────┤
-        │  Android  (.aar)  │  iOS (XCFramework)│
-        │  Compose demo     │  SwiftUI demo     │
-        └──────────────────┴─────────────────┘
+```mermaid
+flowchart TD
+  AND["🤖 Android SDK (.aar)"]
+  IOS["🍎 iOS SDK (XCFramework)"]
+  CORE["🧩 KMP shared core<br/>ChatClient · store · reconnect"]
+  WK["☁️ Cloudflare Worker<br/>JWT verify + routing"]
+  DO["🧠 Durable Object / room<br/>hibernation + SQLite"]
+  AND --> CORE
+  IOS --> CORE
+  CORE <-->|"WebSocket · seq/ack"| WK
+  WK --> DO
 ```
 
 ## Repository layout
