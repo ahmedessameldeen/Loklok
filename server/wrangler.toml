@@ -2,10 +2,9 @@ name = "loklok-server"
 main = "src/index.ts"
 compatibility_date = "2024-09-23"
 
-# JWT signing secret. For local dev this default is used; in production set a real
-# secret with:  wrangler secret put LOKLOK_JWT_SECRET
-[vars]
-LOKLOK_JWT_SECRET = "dev-secret-change-me"
+# JWT signing secret — never commit a real value.
+#   Production:  wrangler secret put LOKLOK_JWT_SECRET
+#   Local dev:   add LOKLOK_JWT_SECRET to a .dev.vars file (gitignored)
 
 [[durable_objects.bindings]]
 name = "ROOMS"
